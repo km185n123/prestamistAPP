@@ -5,7 +5,7 @@ import com.google.firebase.firestore.CollectionReference
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.FirebaseFirestoreSettings
 import com.google.firebase.firestore.QuerySnapshot
-import com.paparazziapps.pretamistapp.modulos.registro.pojo.Prestamo
+import com.paparazziapps.pretamistapp.modulos.registro.pojo.PrestamoForm
 import com.paparazziteam.yakulap.helper.applicacion.MyPreferences
 
 class PrestamoProvider {
@@ -28,10 +28,10 @@ class PrestamoProvider {
     }
 
     //Super admin -- implemented
-    fun create(prestamo: Prestamo, idSucursal:Int): Task<Void> {
-        prestamo.sucursalId = if(preferences.isSuperAdmin) idSucursal else  preferences.sucursalId
-        prestamo.id = mCollectionPrestamo.document().id
-        return mCollectionPrestamo.document(prestamo.id!!).set(prestamo)
+    fun create(prestamoForm: PrestamoForm, idSucursal:Int): Task<Void> {
+        prestamoForm.sucursalId = if(preferences.isSuperAdmin) idSucursal else  preferences.sucursalId
+        prestamoForm.id = mCollectionPrestamo.document().id
+        return mCollectionPrestamo.document(prestamoForm.id!!).set(prestamoForm)
     }
 
     //Super admin -- implemented

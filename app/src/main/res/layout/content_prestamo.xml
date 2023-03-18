@@ -163,6 +163,7 @@
                 <com.google.android.material.textview.MaterialTextView
                     android:layout_width="wrap_content"
                     android:layout_gravity="center"
+                    android:layout_marginEnd="3dp"
                     android:fontFamily="@font/googlesans_regular"
                     android:layout_height="wrap_content"
                     android:text="@string/fragment_principal_send_mensaje_description"/>
@@ -204,6 +205,7 @@
                 <com.google.android.material.textview.MaterialTextView
                     android:layout_width="wrap_content"
                     android:layout_gravity="center"
+                    android:layout_marginEnd="3dp"
                     android:fontFamily="@font/googlesans_regular"
                     android:layout_height="wrap_content"
                     android:text="@string/fragment_principal_download_report"/>

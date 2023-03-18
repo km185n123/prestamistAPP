@@ -13,8 +13,6 @@ import com.paparazziapps.pretamistapp.R
 import com.paparazziapps.pretamistapp.databinding.DialogSalirSinGuardarBinding
 import com.paparazziapps.pretamistapp.databinding.FragmentHomeBinding
 import com.paparazziapps.pretamistapp.helper.*
-import com.paparazziapps.pretamistapp.helper.views.beGone
-import com.paparazziapps.pretamistapp.helper.views.beVisible
 import com.paparazziapps.pretamistapp.modulos.dashboard.adapters.PrestamoAdapter
 import com.paparazziapps.pretamistapp.modulos.dashboard.interfaces.setOnClickedPrestamo
 import com.paparazziapps.pretamistapp.modulos.dashboard.viewmodels.ViewModelDashboard
@@ -22,7 +20,7 @@ import com.paparazziapps.pretamistapp.modulos.login.pojo.Sucursales
 import com.paparazziapps.pretamistapp.modulos.login.pojo.User
 import com.paparazziapps.pretamistapp.modulos.principal.viewmodels.ViewModelPrincipal
 import com.paparazziapps.pretamistapp.modulos.principal.views.PrincipalActivity
-import com.paparazziapps.pretamistapp.modulos.registro.pojo.Prestamo
+import com.paparazziapps.pretamistapp.modulos.registro.pojo.PrestamoForm
 import com.paparazziapps.pretamistapp.modulos.registro.pojo.TypePrestamo
 import com.paparazziapps.pretamistapp.modulos.registro.viewmodels.ViewModelRegister
 import com.paparazziteam.yakulap.helper.applicacion.MyPreferences
@@ -88,7 +86,7 @@ class HomeFragment : Fragment(),setOnClickedPrestamo {
         _viewModel.receivePrestamos().observe(viewLifecycleOwner, Observer(::updatePrestamos))
     }
 
-    fun updatePrestamos(prestamosAll:MutableList<Prestamo>){
+    fun updatePrestamos(prestamosAll:MutableList<PrestamoForm>){
         if(prestamosAll.isEmpty()) {
             binding.emptyPrestamo.isVisible = true
             recyclerPrestamos.isVisible = false
@@ -103,21 +101,21 @@ class HomeFragment : Fragment(),setOnClickedPrestamo {
                     prestamoAdapter.setData(prestamosAll)
                 }else{
                     try {
-                        var newPrestamos = mutableListOf<Prestamo>()
+                        var newPrestamoForms = mutableListOf<PrestamoForm>()
                         var localSucursales = fromJson<List<Sucursales>>(sucurs)
                         localSucursales.forEach{ sucurlocal ->
-                            var item = Prestamo(
+                            var item = PrestamoForm(
                                 type = TypePrestamo.TITLE.value,
                                 title = sucurlocal.name
                             )
-                            newPrestamos.add(item)
+                            newPrestamoForms.add(item)
 
                             var items = prestamosAll.filter {
                                 it.sucursalId == sucurlocal.id
                             }
-                            newPrestamos.addAll(items)
+                            newPrestamoForms.addAll(items)
                         }
-                        prestamoAdapter.setData(newPrestamos)
+                        prestamoAdapter.setData(newPrestamoForms)
 
                     }catch (t:Throwable){
                         FirebaseCrashlytics.getInstance().recordException(t)
@@ -151,7 +149,7 @@ class HomeFragment : Fragment(),setOnClickedPrestamo {
         showMessageAboveMenuInferiorGlobal(message,binding.root)
     }
 
-    fun openDialogActualizarPago(prestamo: Prestamo, montoTotalAPagar: String, adapterPosition:Int) {
+    fun openDialogActualizarPago(prestamoForm: PrestamoForm, montoTotalAPagar: String, adapterPosition:Int) {
 
     }
 
@@ -178,17 +176,17 @@ class HomeFragment : Fragment(),setOnClickedPrestamo {
     }
 
     //->>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>Metodos override
-    override fun actualizarPagoPrestamo(prestamo: Prestamo, needUpdate:Boolean, montoTotalAPagar:Double, adapterPosition:Int, diasRestrasado:String) {
+    override fun actualizarPagoPrestamo(prestamoForm: PrestamoForm, needUpdate:Boolean, montoTotalAPagar:Double, adapterPosition:Int, diasRestrasado:String) {
 
         //println("Hizo click en Actualizar Pago Prestamos")
         context.apply {
-            (this as PrincipalActivity).showBottomSheetDetallePrestamoPrincipal(prestamo, montoTotalAPagar, diasRestrasado, adapterPosition, needUpdate)
+            (this as PrincipalActivity).showBottomSheetDetallePrestamoPrincipal(prestamoForm, montoTotalAPagar, diasRestrasado, adapterPosition, needUpdate)
         }
 
 
     }
 
-    override fun openDialogoActualizarPrestamo(prestamo: Prestamo, montoTotalAPagar: Double, adapterPosition: Int, diasRestantesPorPagar:Int, diasPagados:Int, isClosed:Boolean) {
+    override fun openDialogoActualizarPrestamo(prestamoForm: PrestamoForm, montoTotalAPagar: Double, adapterPosition: Int, diasRestantesPorPagar:Int, diasPagados:Int, isClosed:Boolean) {
 
         binding.cntCortina.isVisible = true
 
@@ -204,12 +202,12 @@ class HomeFragment : Fragment(),setOnClickedPrestamo {
         if(isClosed)
         {
             title.text = "¿Estas seguro de cerrar el préstamo?"
-            desc.text  = ("Se cerrára el préstamo de: <b>${replaceFirstCharInSequenceToUppercase(prestamo.nombres.toString())}, ${replaceFirstCharInSequenceToUppercase(prestamo.apellidos.toString())}").fromHtml()
+            desc.text  = ("Se cerrára el préstamo de: <b>${replaceFirstCharInSequenceToUppercase(prestamoForm.nombres.toString())}, ${replaceFirstCharInSequenceToUppercase(prestamoForm.apellidos.toString())}").fromHtml()
 
         }else
         {
             title.text = "¿Estas seguro de actualizar la deuda?"
-            desc.text  = ("Se actualizará la deuda de: <b>${replaceFirstCharInSequenceToUppercase(prestamo.nombres.toString())}, ${replaceFirstCharInSequenceToUppercase(prestamo.apellidos.toString())} </b>" +
+            desc.text  = ("Se actualizará la deuda de: <b>${replaceFirstCharInSequenceToUppercase(prestamoForm.nombres.toString())}, ${replaceFirstCharInSequenceToUppercase(prestamoForm.apellidos.toString())} </b>" +
                     ",con un monto total a pagar de: <br><b>${getString(R.string.tipo_moneda)}${montoTotalAPagar}<b>").fromHtml()
         }
 
@@ -241,7 +239,7 @@ class HomeFragment : Fragment(),setOnClickedPrestamo {
 
                 if (isClosed)
                 {
-                    _viewModel.cerrarPrestamo(prestamo.id){
+                    _viewModel.cerrarPrestamo(prestamoForm.id){
                             isCorrect, msj, result, isRefresh ->
                         if(isCorrect)
                         {
@@ -256,16 +254,16 @@ class HomeFragment : Fragment(),setOnClickedPrestamo {
                     }
                 }else
                 {
-                    _viewModel.updateUltimoPago(prestamo.id, getFechaActualNormalCalendar(), montoTotalAPagar, diasRestantesPorPagar, diasPagados){
+                    _viewModel.updateUltimoPago(prestamoForm.id, getFechaActualNormalCalendar(), montoTotalAPagar, diasRestantesPorPagar, diasPagados){
                             isCorrect, msj, result, isRefresh ->
 
                         if(isCorrect)
                         {
-                            prestamo.fechaUltimoPago = getFechaActualNormalCalendar()
-                            prestamo.dias_restantes_por_pagar = diasRestantesPorPagar
-                            prestamo.diasPagados = diasPagados
+                            prestamoForm.fechaUltimoPago = getFechaActualNormalCalendar()
+                            prestamoForm.dias_restantes_por_pagar = diasRestantesPorPagar
+                            prestamoForm.diasPagados = diasPagados
                             //(context as PrincipalActivity).showCortinaPrincipal(false)
-                            prestamoAdapter.updateItem(adapterPosition, prestamo)//Actualizar local recycler View
+                            prestamoAdapter.updateItem(adapterPosition, prestamoForm)//Actualizar local recycler View
                             showMessage(msj)
 
                         }else

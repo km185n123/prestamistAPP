@@ -23,9 +23,7 @@ import com.google.gson.Gson
 import com.paparazziapps.pretamistapp.R
 import com.paparazziapps.pretamistapp.databinding.FragmentRegistrarBinding
 import com.paparazziapps.pretamistapp.helper.*
-import com.paparazziapps.pretamistapp.modulos.principal.viewmodels.ViewModelPrincipal
-import com.paparazziapps.pretamistapp.modulos.principal.views.PrincipalActivity
-import com.paparazziapps.pretamistapp.modulos.registro.pojo.Prestamo
+import com.paparazziapps.pretamistapp.modulos.registro.pojo.PrestamoForm
 import com.paparazziapps.pretamistapp.modulos.registro.viewmodels.ViewModelRegister
 
 class RegistrarFragment : Fragment() {
@@ -63,7 +61,7 @@ class RegistrarFragment : Fragment() {
     var interesEntero:Int = 0
     var montoDiarioAPagar:Double = 0.0
     var montoTotalAPagar:Double = 0.0
-    var prestamo = Prestamo()
+    var prestamoForm = PrestamoForm()
 
     //Layout
     val listaIntereses = arrayListOf<String>("8%","10%","20%","30%","40%","50%")
@@ -143,14 +141,14 @@ class RegistrarFragment : Fragment() {
     private fun continuar() {
         btnContinuar.setOnClickListener {
 
-            prestamo.capital = capitalEntero
-            prestamo.interes = interesEntero
-            prestamo.plazo_vto = mesesEntero
-            prestamo.montoDiarioAPagar = montoDiarioAPagar
-            prestamo.montoTotalAPagar = montoTotalAPagar
+            prestamoForm.capital = capitalEntero
+            prestamoForm.interes = interesEntero
+            prestamoForm.plazo_vto = mesesEntero
+            prestamoForm.montoDiarioAPagar = montoDiarioAPagar
+            prestamoForm.montoTotalAPagar = montoTotalAPagar
 
             val gson = Gson()
-            val prestamoJson = gson.toJson(prestamo)
+            val prestamoJson = gson.toJson(prestamoForm)
 
             //Show next activity - Register pagos
             startForResult.launch(Intent(context, RegistrarActivity::class.java).putExtra("prestamoJson",prestamoJson))

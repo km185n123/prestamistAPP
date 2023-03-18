@@ -25,11 +25,7 @@ android {
             minifyEnabled false
             shrinkResources false
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
-            firebaseCrashlytics {
-                nativeSymbolUploadEnabled true
-                strippedNativeLibsDir 'build/intermediates/stripped_native_libs/release/out/lib'
-                unstrippedNativeLibsDir 'build/intermediates/merged_native_libs/release/out/lib'
-            }
+
         }
 
         debug {

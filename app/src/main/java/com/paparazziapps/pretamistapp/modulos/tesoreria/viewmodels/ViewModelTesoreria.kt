@@ -2,10 +2,9 @@ package com.paparazziapps.pretamistapp.modulos.tesoreria.viewmodels
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
-import com.google.android.gms.common.internal.Constants
 import com.google.firebase.firestore.ktx.toObject
 import com.paparazziapps.pretamistapp.helper.*
-import com.paparazziapps.pretamistapp.modulos.registro.pojo.Prestamo
+import com.paparazziapps.pretamistapp.modulos.registro.pojo.PrestamoForm
 import com.paparazziapps.pretamistapp.modulos.registro.providers.DetallePrestamoProvider
 import com.paparazziapps.pretamistapp.modulos.registro.providers.PrestamoProvider
 import com.paparazziapps.pretamistapp.modulos.tesoreria.pojo.DetallePrestamoSender
@@ -16,17 +15,17 @@ class ViewModelTesoreria private constructor() {
     val mPrestamoProvider = PrestamoProvider()
     val mDetallePrestamo = DetallePrestamoProvider()
 
-    var _prestamos = MutableLiveData<MutableList<Prestamo>>()
+    var _prestamos = MutableLiveData<MutableList<PrestamoForm>>()
     var _pagosTotalesByTime = MutableLiveData<Double>()
 
     fun getMessage() : LiveData<String> =  _message
-    fun receivePrestamos (): LiveData<MutableList<Prestamo>> =_prestamos
+    fun receivePrestamos (): LiveData<MutableList<PrestamoForm>> =_prestamos
     fun getPagosTotalesByTime():LiveData<Double> = _pagosTotalesByTime
 
     fun getPrestamosSize(onComplete: (Boolean, String, Int?, Boolean) -> Unit)
     {
         var isCorrect = false
-        var listPrestamos = mutableListOf<Prestamo>()
+        var listPrestamoForms = mutableListOf<PrestamoForm>()
 
         try {
 
@@ -40,9 +39,9 @@ class ViewModelTesoreria private constructor() {
                 }else
                 {
                     it.forEach { document->
-                        listPrestamos.add(document.toObject<Prestamo>())
+                        listPrestamoForms.add(document.toObject<PrestamoForm>())
                     }
-                    _prestamos.value = listPrestamos
+                    _prestamos.value = listPrestamoForms
                     onComplete(isCorrect,"",it.size(),false)
                 }
 

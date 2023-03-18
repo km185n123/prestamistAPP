@@ -1,12 +1,7 @@
 package com.paparazziapps.pretamistapp.modulos.dashboard.adapters
 
-import android.animation.AnimatorSet
-import android.animation.ObjectAnimator
 import android.content.Intent
-import android.media.MediaPlayer
 import android.net.Uri
-import android.os.Handler
-import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.cardview.widget.CardView
@@ -20,14 +15,14 @@ import com.paparazziapps.pretamistapp.databinding.ContentPrestamoBinding
 import com.paparazziapps.pretamistapp.databinding.ContentTitlePrestamoBinding
 import com.paparazziapps.pretamistapp.helper.*
 import com.paparazziapps.pretamistapp.modulos.dashboard.interfaces.setOnClickedPrestamo
-import com.paparazziapps.pretamistapp.modulos.registro.pojo.Prestamo
+import com.paparazziapps.pretamistapp.modulos.registro.pojo.PrestamoForm
 import com.paparazziapps.pretamistapp.modulos.registro.pojo.TypePrestamo
 import java.text.SimpleDateFormat
 import java.util.*
 
 class PrestamoAdapter(var setOnClickedPrestamo: setOnClickedPrestamo) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
-    var prestamosList: MutableList<Prestamo> = mutableListOf()
+    var prestamosList: MutableList<PrestamoForm> = mutableListOf()
     var fechaActual:String
     //Time peru [Tiempo Actual]
     var fecha = SimpleDateFormat("dd/MM/yyyy").apply {
@@ -37,13 +32,14 @@ class PrestamoAdapter(var setOnClickedPrestamo: setOnClickedPrestamo) : Recycler
         }
     }
 
-    fun setData(listPrestamos: MutableList<Prestamo>) {
-        prestamosList = listPrestamos
+    fun setData(listPrestamoForms: MutableList<PrestamoForm>) {
+        println("setData: ${listPrestamoForms.size}")
+        prestamosList = listPrestamoForms
         notifyDataSetChanged()
     }
 
-    fun updateItem(position: Int, prestamo: Prestamo) {
-        prestamosList.set(position,prestamo)
+    fun updateItem(position: Int, prestamoForm: PrestamoForm) {
+        prestamosList.set(position,prestamoForm)
         notifyItemChanged(position)
     }
 
@@ -58,7 +54,7 @@ class PrestamoAdapter(var setOnClickedPrestamo: setOnClickedPrestamo) : Recycler
                     ViewHolderTitle(parent.inflate(R.layout.content_title_prestamo))
                 }
                 else->{
-                    ViewHolder(parent.inflate(R.layout.content_prestamo))
+                    ViewHolderLoanCard(parent.inflate(R.layout.content_prestamo))
                 }
         }
     }
@@ -80,21 +76,22 @@ class PrestamoAdapter(var setOnClickedPrestamo: setOnClickedPrestamo) : Recycler
 
     interface PrestamoViewHolder {
         fun bindView(
-            item: Prestamo,
+            item: PrestamoForm,
             fechaActual: String,
             setOnClickedPrestamo: setOnClickedPrestamo
         )
     }
 
-    class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView), PrestamoViewHolder {
+    class ViewHolderLoanCard(itemView: View) : RecyclerView.ViewHolder(itemView), PrestamoViewHolder {
 
         val binding = ContentPrestamoBinding.bind(itemView)
 
         override fun bindView(
-            item: Prestamo,
+            item: PrestamoForm,
             fechaActual: String,
             setOnClickedPrestamo: setOnClickedPrestamo
         ) {
+            println("item prestamo adapter: $item")
             var telefono = binding.telefono
             var nombreCompleto = binding.nombreCompleto
             var numero_dias_retrasados = binding.numeroDiasRetrasados
@@ -153,7 +150,7 @@ class PrestamoAdapter(var setOnClickedPrestamo: setOnClickedPrestamo) : Recycler
             setDiasRestantesPorPagar(item)
         }
 
-        private fun setDiasRestantesPorPagar(item: Prestamo) {
+        private fun setDiasRestantesPorPagar(item: PrestamoForm) {
 
             val lblDiasPorPagar = binding.lblDiasPorPagar
             val numeroDiasPorPagar = binding.numeroDiasPorPagar
@@ -198,7 +195,7 @@ class PrestamoAdapter(var setOnClickedPrestamo: setOnClickedPrestamo) : Recycler
         private fun calcularDiasRetrasados(
             itemView: View,
             diasRetrasados: MaterialTextView,
-            item: Prestamo,
+            item: PrestamoForm,
             diasRetrasadosCardview: CardView,
             fechaActual: String
         ) {
@@ -267,7 +264,7 @@ class PrestamoAdapter(var setOnClickedPrestamo: setOnClickedPrestamo) : Recycler
         val binding = ContentTitlePrestamoBinding.bind(itemView)
 
         override fun bindView(
-            item: Prestamo,
+            item: PrestamoForm,
             fechaActual: String,
             setOnClickedPrestamo: setOnClickedPrestamo
         ) {

@@ -5,7 +5,7 @@ import kotlinx.serialization.Serializable
 
 
 @Serializable
-data class Prestamo (
+data class PrestamoForm (
     @SerialName("id")
     var id:String?=null,
     @SerialName("nombres")
@@ -41,7 +41,6 @@ data class Prestamo (
     var montoDiarioAPagar:Double?=null,
     @SerialName("state")
     var state:String?= null, //CERRADO,ABIERTO
-
     //Sucursal
     @SerialName("sucursalId")
     var sucursalId:Int?=null,
@@ -50,6 +49,52 @@ data class Prestamo (
     @SerialName("title")
     var title:String?=null
 )
+
+//PrestamoResponse
+
+data class PrestamoResponse (
+    val id:String = "",
+    val nombres:String = "",
+    val apellidos: String = "",
+    val dni:String = "",
+    val celular:String = "",
+    val fecha:String = "",
+    val unixtime:Long = 0,
+    val unixtimeRegistered: Long = 0,
+    val capital:Int = 0,
+    val interes:Int = 0,
+    val plazo_vto:Int = 0,
+    val dias_restantes_por_pagar:Int = 0,
+    val fechaUltimoPago: String = "",
+    val diasPagados: Int = 0,
+    val montoTotalAPagar:Double = 0.0,
+    val montoDiarioAPagar:Double = 0.0,
+    val state:String = "",
+    val sucursalId:Int = 0
+)
+
+fun PrestamoResponse.toPrestamoForm(): PrestamoForm {
+    return PrestamoForm(
+        id = this.id,
+        nombres = this.nombres,
+        apellidos = this.apellidos,
+        dni = this.dni,
+        celular = this.celular,
+        fecha = this.fecha,
+        unixtime = this.unixtime,
+        unixtimeRegistered = this.unixtimeRegistered,
+        capital = this.capital,
+        interes = this.interes,
+        plazo_vto = this.plazo_vto,
+        dias_restantes_por_pagar = this.dias_restantes_por_pagar,
+        fechaUltimoPago = this.fechaUltimoPago,
+        diasPagados = this.diasPagados,
+        montoTotalAPagar = this.montoTotalAPagar,
+        montoDiarioAPagar = this.montoDiarioAPagar,
+        state = this.state,
+        sucursalId = this.sucursalId
+    )
+}
 
 enum class TypePrestamo(val value: Int) {
     TITLE(0),

@@ -3,9 +3,8 @@ package com.paparazziapps.pretamistapp.modulos.registro.viewmodels
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.paparazziapps.pretamistapp.helper.getDoubleWithOneDecimalsReturnDouble
-import com.paparazziapps.pretamistapp.modulos.registro.pojo.Prestamo
+import com.paparazziapps.pretamistapp.modulos.registro.pojo.PrestamoForm
 import com.paparazziapps.pretamistapp.modulos.registro.providers.PrestamoProvider
-import com.paparazziteam.yakulap.helper.applicacion.MyPreferences
 import java.lang.Exception
 
 open class ViewModelRegister private constructor(){
@@ -39,12 +38,12 @@ open class ViewModelRegister private constructor(){
         }
     }
 
-    fun createPrestamo(prestamo: Prestamo, idSucursal:Int, onComplete: (Boolean, String, String?, Boolean) -> Unit)
+    fun createPrestamo(prestamoForm: PrestamoForm, idSucursal:Int, onComplete: (Boolean, String, String?, Boolean) -> Unit)
     {
         var isCorrect = false
         try {
 
-        mPrestamoProvider.create(prestamo, idSucursal = idSucursal).addOnCompleteListener {
+        mPrestamoProvider.create(prestamoForm, idSucursal = idSucursal).addOnCompleteListener {
                 if(it.isSuccessful)
                 {
                     _message.value = "El prestamo se registro correctamente"
