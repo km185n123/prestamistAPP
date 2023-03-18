@@ -1,5 +1,6 @@
 package com.paparazziapps.pretamistapp.modulos.registro.pojo
 
+import com.google.firebase.database.PropertyName
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 
@@ -51,7 +52,7 @@ data class PrestamoForm (
 )
 
 //PrestamoResponse
-
+@Serializable
 data class PrestamoResponse (
     val id:String = "",
     val nombres:String = "",
@@ -70,8 +71,13 @@ data class PrestamoResponse (
     val montoTotalAPagar:Double = 0.0,
     val montoDiarioAPagar:Double = 0.0,
     val state:String = "",
-    val sucursalId:Int = 0
-)
+    val sucursalId:Int = -1,
+    val type:Int?= -1,
+    val title:String?= ""
+){
+    //default constructor
+    constructor():this("","","","","","",0,0,0,0,0,0,"",0,0.0,0.0,"",-1)
+}
 
 fun PrestamoResponse.toPrestamoForm(): PrestamoForm {
     return PrestamoForm(

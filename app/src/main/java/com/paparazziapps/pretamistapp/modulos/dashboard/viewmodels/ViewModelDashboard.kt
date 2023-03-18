@@ -36,6 +36,8 @@ class ViewModelDashboard private constructor(){
 
                 println("ViewModel --->_Prestamos: ${listPrestamoForms.size}")
                 _prestamos.value = listPrestamoForms
+            }.addOnFailureListener {
+                println("Error: ${it.message}")
             }
 
         }catch (t:Throwable)
