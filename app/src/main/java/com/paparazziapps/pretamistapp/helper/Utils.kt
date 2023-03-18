@@ -138,19 +138,16 @@ fun convertFechaActualNormalToUnixtime(fecha: String)  : Long
   return SimpleDateFormat("dd/MM/yyyy").parse(fecha).time
 }
 
-fun replaceFirstCharInSequenceToUppercase(text: String): String
-{
+//Replace first character of each word to uppercase
+fun replaceFirstCharInSequenceToUppercase(text: String): String {
     val words = text.split(' ');
     var subString = words.joinToString(" ") { word ->
-        word.replaceFirstChar {
-            it.uppercase()
-        }
-
+        word.replaceFirstChar { it.uppercase() }
     }
-
     return subString
-
 }
+
+
 
 fun getDiasRestantesFromDateToNow(fecha: String):String
 {

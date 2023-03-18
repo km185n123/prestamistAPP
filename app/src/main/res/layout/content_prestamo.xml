@@ -1,12 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
+<com.google.android.material.card.MaterialCardView xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_marginStart="16dp"
     android:layout_marginEnd="16dp"
     android:layout_marginTop="16dp"
     app:cardCornerRadius="8dp"
+    app:strokeWidth="2dp"
+    app:strokeColor="@color/colorSecondary"
     android:layout_height="wrap_content">
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -55,6 +57,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:padding="3dp"
+                    android:fontFamily="@font/googlesans_regular"
                     android:text="días retrasados"
                     android:textColor="@color/white"
                     android:textSize="9dp" />
@@ -96,6 +99,7 @@
                     android:layout_height="wrap_content"
                     android:padding="3dp"
                     android:text="días por pagar"
+                    android:fontFamily="@font/googlesans_regular"
                     android:textColor="@color/white"
                     android:textSize="9dp" />
 
@@ -108,11 +112,13 @@
             android:id="@+id/nombre_completo"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="5dp"
+            android:layout_marginTop="10dp"
+            android:fontFamily="@font/googlesans_bold"
             android:textSize="16dp"
-            android:text="Antony Nicolas Huaman Alikhan"
+            app:layout_constraintRight_toRightOf="parent"
             app:layout_constraintStart_toStartOf="@+id/cardview_dias_retrasados"
-            app:layout_constraintTop_toBottomOf="@+id/cardview_dias_retrasados" />
+            app:layout_constraintTop_toBottomOf="@+id/cardview_dias_retrasados"
+            tools:text="Antony Nicolas Huaman Alikhan" />
 
         <com.google.android.material.textview.MaterialTextView
             android:id="@+id/telefono"
@@ -120,23 +126,66 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="5dp"
             android:layout_marginBottom="16dp"
-            android:text="930 292 192"
+            tools:text="@string/sample_phone"
+            android:fontFamily="@font/googlesans_regular"
             android:textSize="16dp"
-            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="@+id/nombre_completo"
             app:layout_constraintTop_toBottomOf="@+id/nombre_completo" />
 
-        <androidx.cardview.widget.CardView
+        <com.google.android.material.card.MaterialCardView
             android:id="@+id/cardview_enviar_msj"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginRight="6dp"
             app:cardCornerRadius="8dp"
-            app:cardElevation="3dp"
+            app:cardElevation="1dp"
+            app:strokeWidth="1dp"
+            app:strokeColor="@color/black"
+            android:layout_marginBottom="6dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/telefono">
+
+            <LinearLayout
+                android:id="@+id/linear_layout_send_message"
+                android:layout_width="wrap_content"
+                android:padding="3dp"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <com.google.android.material.imageview.ShapeableImageView
+                    android:layout_width="25dp"
+                    android:layout_height="25dp"
+                    android:padding="3dp"
+                    android:layout_gravity="center"
+                    android:foregroundGravity="left"
+                    android:src="@drawable/ic_whatsapp" />
+
+                <com.google.android.material.textview.MaterialTextView
+                    android:layout_width="wrap_content"
+                    android:layout_gravity="center"
+                    android:fontFamily="@font/googlesans_regular"
+                    android:layout_height="wrap_content"
+                    android:text="@string/fragment_principal_send_mensaje_description"/>
+            </LinearLayout>
+
+        </com.google.android.material.card.MaterialCardView>
+
+        <com.google.android.material.card.MaterialCardView
+            android:id="@+id/cardview_download_report"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="6dp"
+            app:cardCornerRadius="8dp"
+            app:cardElevation="1dp"
+            app:strokeWidth="1dp"
+            android:clickable="true"
+            android:focusable="true"
+            android:layout_marginTop="6dp"
+            app:strokeColor="@color/black"
             android:layout_marginBottom="6dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="@+id/telefono">
+            app:layout_constraintTop_toBottomOf="@+id/cardview_enviar_msj">
 
             <LinearLayout
                 android:layout_width="wrap_content"
@@ -147,20 +196,20 @@
                 <com.google.android.material.imageview.ShapeableImageView
                     android:layout_width="25dp"
                     android:layout_height="25dp"
+                    android:padding="3dp"
                     android:layout_gravity="center"
                     android:foregroundGravity="left"
-                    android:src="@drawable/ic_whatsapp" />
+                    android:src="@drawable/ic_file_report" />
 
                 <com.google.android.material.textview.MaterialTextView
                     android:layout_width="wrap_content"
                     android:layout_gravity="center"
-                    android:textStyle="bold"
+                    android:fontFamily="@font/googlesans_regular"
                     android:layout_height="wrap_content"
-                    android:text="Enviar mensaje"/>
-
+                    android:text="@string/fragment_principal_download_report"/>
             </LinearLayout>
 
-        </androidx.cardview.widget.CardView>
+        </com.google.android.material.card.MaterialCardView>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -168,4 +217,4 @@
 
 
 
-</androidx.cardview.widget.CardView>
+</com.google.android.material.card.MaterialCardView>

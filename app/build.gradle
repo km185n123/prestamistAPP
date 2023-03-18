@@ -111,4 +111,7 @@ dependencies {
 
     implementation 'androidx.multidex:multidex:2.0.1'
 
+    //iText
+    implementation 'com.itextpdf.android:kernel-android:7.2.2'
+
 }

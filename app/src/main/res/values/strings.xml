@@ -31,6 +31,9 @@
 
     <string name="loading">Cargando...</string>
     <string name="logout">Cerrar Sessión</string>
+    <string name="sample_phone">930 292 192</string>
+    <string name="fragment_principal_send_mensaje_description">Enviar recordatorio</string>
+    <string name="fragment_principal_download_report">Descargar Reporte</string>
 
 
 </resources>

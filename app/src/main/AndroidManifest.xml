@@ -30,7 +30,7 @@
         <activity
             android:name=".modulos.principal.views.PrincipalActivity"
             android:exported="true"
-            android:theme="@style/Theme.noActionBar"
+            android:theme="@style/Theme.MaterialComponents.NoActionBar"
             android:windowSoftInputMode="stateHidden">
         </activity>
         <activity
