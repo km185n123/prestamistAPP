@@ -17,6 +17,7 @@ import com.paparazziapps.pretamistapp.databinding.ActivityLoginBinding
 import com.paparazziapps.pretamistapp.helper.*
 import com.paparazziapps.pretamistapp.modulos.login.viewmodels.ViewModelLogin
 import com.paparazziapps.pretamistapp.modulos.principal.views.PrincipalActivity
+import com.paparazziapps.pretamistapp.modulos.registrobusiness.RegisterBusinessActivity
 import com.paparazziteam.yakulap.helper.applicacion.MyPreferences
 
 class LoginActivity : AppCompatActivity() {
@@ -38,7 +39,6 @@ class LoginActivity : AppCompatActivity() {
         setColorToStatusBar(this)
         isAlreadyLogin()
 
-
         binding.apply {
             txtRegistroNuevo = btnRegister
             btnLoginEmail    = binding.ingresarLoginButton
@@ -55,6 +55,14 @@ class LoginActivity : AppCompatActivity() {
         loginFirebase()
 
         binding.versioncode.text = "Versión ${getVersionName()}"
+
+        setupButtons()
+    }
+
+    private fun setupButtons() {
+        binding.btnRegisterBusiness.setOnClickListener {
+            startActivity(Intent(this, RegisterBusinessActivity::class.java))
+        }
     }
 
     private fun showObservables() {

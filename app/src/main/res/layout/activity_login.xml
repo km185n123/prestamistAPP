@@ -100,11 +100,28 @@
                     android:layout_gravity="center"
                     android:layout_marginTop="8dp"
                     android:background="@drawable/corner_boton_outline"
+                    android:shadowRadius="15"
+                    android:shadowColor="@color/purple_200"
                     android:enabled="false"
                     android:fontFamily="@font/googlesans_regular"
                     android:text="Ingresar"
                     android:textColor="@color/color_input_text"
                     app:backgroundTint="@color/color_input_text" />
+
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/btnRegisterBusiness"
+                    style="?android:textAppearanceSmall"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:minHeight="60dp"
+                    android:layout_gravity="center"
+                    android:layout_marginTop="8dp"
+                    app:cornerRadius="90dp"
+                    android:enabled="false"
+                    android:fontFamily="@font/googlesans_regular"
+                    android:text="Registrarse como empresa"
+                    android:textColor="@color/white"
+                    app:backgroundTint="@color/colorSecondary" />
 
 
                 <LinearLayout
