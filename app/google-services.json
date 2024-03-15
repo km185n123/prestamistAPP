@@ -1,37 +1,27 @@
 {
   "project_info": {
-    "project_number": "668972476088",
-    "firebase_url": "https://prestamist-pstore-default-rtdb.firebaseio.com",
-    "project_id": "prestamist-pstore",
-    "storage_bucket": "prestamist-pstore.appspot.com"
+    "project_number": "432305508596",
+    "firebase_url": "https://presta-online-default-rtdb.firebaseio.com",
+    "project_id": "presta-online",
+    "storage_bucket": "presta-online.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:668972476088:android:74ea2c29ad1c585d2cb64d",
+        "mobilesdk_app_id": "1:432305508596:android:bb380882db089f1a1fcea1",
         "android_client_info": {
           "package_name": "com.paparazziapps.pretamistapp"
         }
       },
-      "oauth_client": [
-        {
-          "client_id": "668972476088-8khvs49ooiqum0e3q9ppco55jc9crkep.apps.googleusercontent.com",
-          "client_type": 3
-        }
-      ],
+      "oauth_client": [],
       "api_key": [
         {
-          "current_key": "AIzaSyBIMJhI4kvM1sdZovBz8sWsZRBp89uE5Us"
+          "current_key": "AIzaSyA09c5oppAKZ_Dvp_GbvqmUorSIAk_ZWRw"
         }
       ],
       "services": {
         "appinvite_service": {
-          "other_platform_oauth_client": [
-            {
-              "client_id": "668972476088-8khvs49ooiqum0e3q9ppco55jc9crkep.apps.googleusercontent.com",
-              "client_type": 3
-            }
-          ]
+          "other_platform_oauth_client": []
         }
       }
     }
